@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+
     <title id="metaTitle">Shapix | Knife Game</title>
     <meta name="description" id="metaDesc" content="Shapix — минималистичная игра-бросок ножа для Android. Испытай рефлексы в точной механике, чистом дизайне и без лишнего. Early Access.">
     <meta name="keywords" id="metaKeywords" content="Shapix, knife game, игра нож, knife throw, Android game, минималистичная игра, бросок ножа, мобильная игра">
@@ -1385,6 +1385,19 @@
             margin-bottom: 0;
         }
 
+        .footer-copyright .elsim-link {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: opacity 0.2s ease, border-color 0.2s ease;
+        }
+
+        .footer-copyright .elsim-link:hover {
+            opacity: 0.8;
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
         @media (max-width: 768px) {
             .footer-lang-copy-row {
                 flex-direction: column;
@@ -1636,7 +1649,7 @@
                 <button class="lang-btn" data-lang="en">EN</button>
                 <button class="lang-btn" data-lang="az">AZ</button>
             </div>
-            <p class="footer-copyright" id="footerCopyright">&copy; 2026 Shapix Project. Разработано by Elsim.</p>
+            <p class="footer-copyright" id="footerCopyright">&copy; 2026 Shapix Project. Разработано by Elsim</p>
         </div>
         <div class="footer-links">
             <a href="https://drive.google.com/file/d/1vnLylLGBSTnf7RZnMYY63awy9a5CfQjg/view?usp=sharing" data-i18n="rules">Правила игры</a>
@@ -1941,7 +1954,7 @@
     <script>
         const i18n = {
             ru: {
-                copyright: '© 2026 Shapix Project. Разработано by Elsim.',
+                copyright: '© 2026 Shapix Project. Разработано by <a class="elsim-link" href="https://elsim-web-site.vercel.app" target="_blank" rel="noopener">Elsim</a>.',
                 rules: 'Правила игры',
                 privacy: 'Политика конфиденциальности',
                 heroBadge: 'РАННИЙ ДОСТУП',
@@ -1996,7 +2009,7 @@
                 htmlLang: 'ru',
             },
             en: {
-                copyright: '© 2026 Shapix Project. Developed by Elsim.',
+                copyright: '© 2026 Shapix Project. Developed by <a class="elsim-link" href="https://elsim-web-site.vercel.app" target="_blank" rel="noopener">Elsim</a>.',
                 rules: 'Game Rules',
                 privacy: 'Privacy Policy',
                 heroBadge: 'Early Access',
@@ -2051,7 +2064,7 @@
                 htmlLang: 'en',
             },
             az: {
-                copyright: '© 2026 Shapix Project. Elsim tərəfindən hazırlanıb.',
+                copyright: '© 2026 Shapix Project. <a class="elsim-link" href="https://elsim-web-site.vercel.app" target="_blank" rel="noopener">Elsim</a> tərəfindən hazırlanıb.',
                 rules: 'Oyun Qaydaları',
                 privacy: 'Məxfilik Siyasəti',
                 heroBadge: 'Early Access',
@@ -2144,7 +2157,7 @@
                 "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
             }, null, 2);
 
-            document.getElementById('footerCopyright').textContent = t.copyright;
+            document.getElementById('footerCopyright').innerHTML = t.copyright;
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.dataset.i18n;
