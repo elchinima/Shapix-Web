@@ -1,0 +1,170 @@
+@media (max-width: 768px) {
+     .support-modal {
+         padding: 28px 20px 26px;
+         border-radius: 20px;
+         margin: 16px;
+         height: 605px;
+         overflow-y: hidden;
+     }
+
+     .support-heart {
+         font-size: 2rem;
+         margin-top: 10px;
+         margin-bottom: 15px;
+     }
+
+     .support-modal h2 {
+         font-size: 1.2rem;
+         margin-bottom: 10px;
+     }
+
+     .support-modal p {
+         font-size: 0.9rem;
+         margin-bottom: 35px;
+         line-height: 1.6;
+     }
+
+     .support-qr-wrap {
+         width: 140px;
+         height: 140px;
+         padding: 10px;
+         margin-bottom: 10px;
+     }
+
+     .support-qr-hint {
+         margin-bottom: 25px;
+     }
+
+     .support-divider {
+         margin-bottom: 30px;
+     }
+
+     .support-btn {
+         padding: 13px 20px;
+         font-size: 0.88rem;
+     }
+
+     .support-note {
+         margin-top: 20px;
+         font-size: 0.6rem;
+     }
+
+     .nav-link {
+         display: none;
+     }
+
+     .navbar {
+         padding: 14px 4%;
+         gap: 8px;
+     }
+
+     .logo {
+         font-size: 1.2rem;
+     }
+
+     .logo span {
+         font-size: 0.7rem;
+     }
+
+     .nav-links {
+         gap: 16px;
+     }
+
+     .nav-links a {
+         font-size: 0.82rem;
+     }
+
+     .hero-content h1 {
+         font-size: 3rem;
+     }
+
+     .gallery {
+         padding: 80px 0;
+     }
+
+     #reviewOverlay {
+         align-items: center;
+         padding: 16px;
+     }
+
+     .modal {
+         padding: 32px 24px;
+         margin: 0;
+         border-radius: 20px;
+         max-height: 85vh;
+         width: 100%;
+         max-width: 100%;
+         transform: translateY(20px) scale(0.97);
+     }
+
+     #reviewOverlay.open .modal {
+         transform: translateY(0) scale(1);
+     }
+
+     .modal h2 {
+         font-size: 1.3rem;
+     }
+
+     .modal-subtitle {
+         font-size: 0.82rem;
+         margin-bottom: 18px;
+     }
+
+     .stars {
+         gap: 6px;
+         margin-bottom: 18px;
+     }
+
+     .star {
+         font-size: 1.6rem;
+     }
+
+     .field-wrap {
+         margin-bottom: 12px;
+     }
+
+     .modal input,
+     .modal textarea {
+         padding: 11px 14px;
+         font-size: 16px;
+         border-radius: 10px;
+     }
+
+     .modal-submit {
+         padding: 13px;
+         font-size: 0.95rem;
+         margin-top: 14px;
+     }
+
+     .info-tooltip {
+         width: 220px;
+         left: auto;
+         right: 0;
+         transform: none;
+     }
+
+     .info-tooltip::after {
+         left: auto;
+         right: 12px;
+         transform: none;
+     }
+
+     .footer-lang-copy-row {
+         flex-direction: column;
+         gap: 10px;
+     }
+ }
+
+ @media (max-width: 400px) {
+     .modal {
+         padding: 24px 18px;
+     }
+
+     .star {
+         font-size: 1.4rem;
+     }
+
+     .modal h2 {
+         font-size: 1.2rem;
+     }
+ }
