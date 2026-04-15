@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title id="metaTitle">Shapix | Knife Game</title>
+    <meta name="description" id="metaDesc"
+        content="Shapix — минималистичная игра-бросок ножа для Android. Испытай рефлексы в точной механике, чистом дизайне и без лишнего. Early Access.">
+    <meta name="keywords" id="metaKeywords"
+        content="Shapix, knife game, игра нож, knife throw, Android game, минималистичная игра, бросок ножа, мобильная игра">
+    <meta name="author" content="Elsim">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#314D78">
+    <link rel="canonical" href="https://shapix.vercel.app/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shapix.vercel.app/">
+    <meta property="og:title" id="ogTitle" content="Shapix | Knife Game">
+    <meta property="og:description" id="ogDesc"
+        content="Минималистичная игра-бросок ножа для Android. Точная механика, чистый дизайн, Early Access.">
+    <meta property="og:image" content="https://i.imgur.com/JRy3U1U.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" id="ogLocale" content="ru_RU">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="az_AZ">
+    <meta property="og:site_name" content="Shapix">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twTitle" content="Shapix | Knife Game">
+    <meta name="twitter:description" id="twDesc"
+        content="Минималистичная игра-бросок ножа для Android. Точная механика, чистый дизайн, Early Access.">
+    <meta name="twitter:image" content="https://i.imgur.com/JRy3U1U.png">
+
+    <script type="application/ld+json" id="ldJson">
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Shapix",
+          "operatingSystem": "Android",
+          "applicationCategory": "GameApplication",
+          "description": "Минималистичная игра-бросок ножа для Android с точной механикой и чистым дизайном.",
+          "author": {
+            "@type": "Person",
+            "name": "Elsim"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+    </script>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23314D78'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Inter,sans-serif' font-weight='700' font-size='14' fill='white'%3ESh%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./Assets/CSSs/style.css">
+    <link rel="stylesheet" href="./Assets/CSSs/media.css">
+    <script defer src="./Assets/Script/script.js"></script>
+    <script defer src="./Assets/Script/lang-seo.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="loader-logo">SHAPIX <span>v0.5 Beta</span></div>
+        <div class="loader-knife-wrap">
+            <div class="loader-knife"></div>
+        </div>
+        <div class="loader-bar-container">
+            <div class="loader-bar" id="loaderBar"></div>
+        </div>
+        <div class="loader-text" id="loaderText">Загрузка...</div>
+    </div>
+
+    <div id="reviewOverlay">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+
+            <div class="modal-form" id="modalForm">
+                <h2>Оставить отзыв</h2>
+                <p class="modal-subtitle">Поделитесь впечатлениями об игре</p>
+
+                <div class="stars" id="stars">
+                    <span class="star" data-i="1">★</span>
+                    <span class="star" data-i="2">★</span>
+                    <span class="star" data-i="3">★</span>
+                    <span class="star" data-i="4">★</span>
+                    <span class="star" data-i="5">★</span>
+                </div>
+
+                <div class="field-wrap">
+                    <div class="field-header">
+                        <label>Имя</label>
+                        <span class="char-counter" id="nameCounter">0 / 25</span>
+                    </div>
+                    <input type="text" id="reviewName" placeholder="Ваше имя" />
+                </div>
+
+                <div class="field-wrap">
+                    <div class="field-header">
+                        <label>Отзыв</label>
+                        <span class="char-counter" id="textCounter">0 / 250</span>
+                    </div>
+                    <textarea id="reviewText" rows="4" placeholder="Напишите что думаете..."></textarea>
+                </div>
+
+                <div class="contact-toggle" id="contactToggle">
+                    <input type="checkbox" id="contactCheckbox" />
+                    <div class="checkbox-box" id="checkboxBox"></div>
+                    <span class="contact-toggle-label" id="reviewContactToggleLabel">Оставить контакт для обратной связи</span>
+                    <span class="info-icon">
+                        i
+                        <span class="info-tooltip" id="reviewTooltipText">Это поле по желанию. Ваши контактные данные нам нужны для возможного
+                            уточнения некоторых моментов. Контактами обратной связи могут быть один из перечисленных
+                            вариантов:<br><br>1. Email (свой, рабочий)<br>2. Номер телефона (только для
+                            Азербайджана)<br>3. Discord, Instagram, Telegram (должен быть открытым для отправки
+                            сообщений от посторонних пользователей)</span>
+                    </span>
+                </div>
+
+                <div class="contact-field-wrap" id="contactFieldWrap">
+                    <div class="contact-field-inner">
+                        <div class="field-wrap" style="margin-top: 12px;">
+                            <div class="field-header">
+                                <label>Контакт</label>
+                                <span class="char-counter" id="contactCounter">0 / 25</span>
+                            </div>
+                            <input type="text" id="reviewContact" placeholder="Email, телефон, @username..." />
+                        </div>
+                    </div>
+                </div>
+
+                <button class="modal-submit" id="modalSubmit">Отправить</button>
+            </div>
+
+            <div class="modal-success" id="modalSuccess">
+                <div class="success-icon">🎯</div>
+                <h3 id="reviewSuccessTitle">Отзыв отправлен!</h3>
+                <p id="reviewSuccessText">Спасибо за обратную связь — это помогает сделать Shapix лучше.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="registerOverlay">
+        <div class="register-modal">
+            <button class="modal-close" id="registerClose">&times;</button>
+
+            <div class="register-form" id="registerForm">
+                <h2 id="registerTitle">Создать аккаунт</h2>
+                <p class="register-subtitle" id="registerSubtitle">Nickname и Password обязательны. Email можно добавить по желанию.</p>
+
+                <div class="field-wrap">
+                    <label id="registerNicknameLabel" for="registerNickname">Nickname</label>
+                    <input type="text" id="registerNickname" placeholder="Минимум 2 символа" autocomplete="username" minlength="2" required />
+                    <p class="field-error" id="registerNicknameError"></p>
+                </div>
+
+                <div class="contact-toggle" id="registerEmailToggle">
+                    <input type="checkbox" id="registerEmailCheckbox" />
+                    <div class="checkbox-box" id="registerEmailCheckboxBox"></div>
+                    <span class="contact-toggle-label" id="registerEmailToggleLabel">Добавить Email (необязательно)</span>
+                </div>
+
+                <div class="contact-field-wrap" id="registerEmailFieldWrap">
+                    <div class="contact-field-inner">
+                        <div class="field-wrap" style="margin-top: 12px;">
+                            <label id="registerEmailLabel" for="registerEmail">Email</label>
+                            <input type="email" id="registerEmail" placeholder="you@example.com" autocomplete="email" />
+                            <p class="field-error" id="registerEmailError"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-wrap">
+                    <label id="registerPasswordLabel" for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" placeholder="Минимум 8 символов" autocomplete="new-password" minlength="8" required />
+                    <p class="field-error" id="registerPasswordError"></p>
+                </div>
+
+                <button class="modal-submit" id="registerSubmit" type="button">Зарегистрироваться</button>
+            </div>
+
+            <div class="modal-success" id="registerSuccess">
+                <div class="success-icon">✅</div>
+                <h3 id="registerSuccessTitle">Регистрация завершена!</h3>
+                <p id="registerSuccessText">Аккаунт успешно создан.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="supportOverlay">
+        <div class="support-modal">
+            <button class="modal-close" id="supportClose">&times;</button>
+            <span class="support-heart">🧡</span>
+            <h2>Поддержать Shapix</h2>
+            <p>Игра создаётся в одиночку, с душой и без бюджета. Каждый донат — это мотивация делать больше и лучше.
+                Спасибо, что ты здесь.</p>
+            <div class="support-qr-wrap">
+                <img src="https://i.imgur.com/9Ky9OgG.png" alt="QR код для доната" />
+            </div>
+            <div class="support-qr-hint">Отсканируй камерой телефона</div>
+            <div class="support-divider"><span>или</span></div>
+            <a class="support-btn" href="https://dalink.to/elsim" target="_blank" rel="noopener">
+                ❤️ Поддержать онлайн
+            </a>
+            <div class="support-note">Минимальная сумма — $1 · Комиссия платформы ~12%</div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">Shapix <span>v0.5 Beta</span></div>
+        <ul class="nav-links">
+            <li class="nav-link"><a href="#gallery">Галерея</a></li>
+            <li class="nav-link"><a href="#features">О игре</a></li>
+
+            <li><a href="#" id="openReview">Отзыв</a></li>
+            <li><a href="#" id="openRegister">Регистрация</a></li>
+            <li><a href="#" id="openSupport">Поддержать нас</a></li>
+
+            <li class="nav-link"><a id="nav-link-in-process"
+                    href="">Скачать</a>
+            </li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">Early Access</div>
+            <h1>Искусство броска</h1>
+            <p>Испытайте свои рефлексы в минималистичном мире, где важна каждая секунда и каждый миллиметр точности.</p>
+            <div class="btn-knife-wrap">
+                <a href=""
+                    class="btn-primary" id="heroPlayBtn">Играть</a>
+                <svg class="hero-knife" id="heroKnife" viewBox="0 0 18 70" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5" y="-9" width="8" height="25" rx="3" fill="rgba(255,255,255,0.4)" />
+                    <rect x="6" y="16" width="6" height="3" rx="1" fill="rgba(255,255,255,0.6)" />
+                    <rect x="7" y="19" width="4" height="30" fill="white" />
+                    <polygon points="9,70 5,49 13,49" width="5" fill="white" />
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title reveal">Визуальный опыт</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot-card reveal delay-1">
+                    <div class="img-placeholder"><img class="descImage" src="https://i.imgur.com/JRy3U1U.png"
+                            alt="Description image 1" /></div>
+                    <div class="card-info">
+                        <h3>Точная механика</h3>
+                        <p>Интуитивное управление KnifeThrow, отточенное для идеального опыта на Android.</p>
+                    </div>
+                </div>
+                <div class="screenshot-card reveal delay-2">
+                    <div class="img-placeholder"><img class="descImage" src="https://i.imgur.com/RvRN6bC.png"
+                            alt="Description image 2" /></div>
+                    <div class="card-info">
+                        <h3>История побед</h3>
+                        <p>Ваша система JSON-логов фиксирует каждое достижение для глубокой статистики.</p>
+                    </div>
+                </div>
+                <div class="screenshot-card reveal delay-3">
+                    <div class="img-placeholder"><img class="descImage" src="https://i.imgur.com/SaCvRis.png"
+                            alt="Description image 3" /></div>
+                    <div class="card-info">
+                        <h3>Чистый стиль</h3>
+                        <p>Минималистичный дизайн без лишнего визуального шума, только вы и цель.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="feature-item">
+                <span class="badge reveal-scale">Концепция</span>
+                <h2 class="reveal">Ничего лишнего</h2>
+                <p class="reveal delay-1">
+                    Shapix создан для тех, кто ценит чистоту кода и дизайна.
+                    Оптимизировано для высокой производительности, чтобы вы могли
+                    сосредоточиться на главном — на совершенствовании своего рекорда.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="reveal">
+        <div class="footer-lang-copy-row">
+            <div class="footer-lang" id="footerLang">
+                <button class="lang-btn active" data-lang="ru">RU</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="az">AZ</button>
+            </div>
+            <p class="footer-copyright" id="footerCopyright">&copy; 2026 Shapix Project. Разработано by Elsim</p>
+        </div>
+        <div class="footer-links">
+            <a href="https://drive.google.com/file/d/1vnLylLGBSTnf7RZnMYY63awy9a5CfQjg/view?usp=sharing"
+                data-i18n="rules">Правила игры</a>
+            <span class="footer-divider">|</span>
+            <a href="https://drive.google.com/file/d/1ddzn8ieB98frHfCXddp4xudJ7eItT_Qj/view?usp=sharing"
+                data-i18n="privacy">Политика конфиденциальности</a>
+            <span class="footer-divider">|</span>
+            <div class="footer-social">
+                <a href="#">Instagram</a>
+                <a href="#">Telegram</a>
+                <a href="#">Discord</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
