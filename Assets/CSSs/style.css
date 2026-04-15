@@ -163,8 +163,12 @@
      }
  }
 
+<<<<<<< HEAD
  #reviewOverlay,
  #registerOverlay {
+=======
+ #reviewOverlay {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      position: fixed;
      inset: 0;
      background: rgba(0, 0, 0, 0.5);
@@ -178,14 +182,22 @@
      transition: opacity 0.3s ease, visibility 0.3s ease;
  }
 
+<<<<<<< HEAD
  #reviewOverlay.open,
  #registerOverlay.open {
+=======
+ #reviewOverlay.open {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      opacity: 1;
      visibility: visible;
  }
 
+<<<<<<< HEAD
  .modal,
  .register-modal {
+=======
+ .modal {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      background: #2a4068;
      border: 1px solid var(--glass-border);
      border-radius: 24px;
@@ -201,8 +213,12 @@
      overflow-x: hidden;
  }
 
+<<<<<<< HEAD
  #reviewOverlay.open .modal,
  #registerOverlay.open .register-modal {
+=======
+ #reviewOverlay.open .modal {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      transform: translateY(0) scale(1);
  }
 
@@ -224,14 +240,22 @@
      opacity: 1;
  }
 
+<<<<<<< HEAD
  .modal h2,
  .register-modal h2 {
+=======
+ .modal h2 {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      font-size: 1.6rem;
      margin-bottom: 8px;
  }
 
+<<<<<<< HEAD
  .modal-subtitle,
  .register-subtitle {
+=======
+ .modal-subtitle {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      font-size: 0.9rem;
      opacity: 0.5;
      font-weight: 300;
@@ -277,8 +301,12 @@
      margin-bottom: 8px;
  }
 
+<<<<<<< HEAD
  .modal label,
  .register-modal label {
+=======
+ .modal label {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      display: block;
      font-size: 0.8rem;
      letter-spacing: 0;
@@ -303,8 +331,12 @@
  }
 
  .modal input,
+<<<<<<< HEAD
  .modal textarea,
  .register-modal input {
+=======
+ .modal textarea {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      width: 100%;
      background: rgba(255, 255, 255, 0.06);
      border: 1px solid var(--glass-border);
@@ -321,8 +353,12 @@
  }
 
  .modal input:focus,
+<<<<<<< HEAD
  .modal textarea:focus,
  .register-modal input:focus {
+=======
+ .modal textarea:focus {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      border-color: rgba(255, 255, 255, 0.4);
  }
 
@@ -331,6 +367,7 @@
      border-color: #ff6b6b;
  }
 
+<<<<<<< HEAD
  .register-modal input.input-error,
  .register-modal input.input-error:focus {
      border-color: #ff6b6b;
@@ -339,10 +376,15 @@
  .modal input::placeholder,
  .modal textarea::placeholder,
  .register-modal input::placeholder {
+=======
+ .modal input::placeholder,
+ .modal textarea::placeholder {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
      opacity: 0.3;
      font-weight: 300;
  }
 
+<<<<<<< HEAD
  .field-error {
     min-height: 0;
      margin-top: 8px;
@@ -364,6 +406,8 @@
     margin-bottom: 20px;
 }
 
+=======
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
  @keyframes inputShake {
 
      0%,
@@ -594,10 +638,13 @@
      display: none;
  }
 
+<<<<<<< HEAD
  .register-form.hide {
      display: none;
  }
 
+=======
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
  .success-icon {
      font-size: 3rem;
      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;

@@ -40,6 +40,7 @@ document.getElementById('supportClose').addEventListener('click', closeSupportMo
 supportOverlay.addEventListener('click', (e) => { if (e.target === supportOverlay) closeSupportModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSupportModal(); });
 
+<<<<<<< HEAD
 const registerOverlay = document.getElementById('registerOverlay');
 const registerForm = document.getElementById('registerForm');
 const registerSuccess = document.getElementById('registerSuccess');
@@ -172,6 +173,8 @@ registerSubmit.addEventListener('click', () => {
     }, 700);
 });
 
+=======
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
 const overlay = document.getElementById('reviewOverlay');
 const modalForm = document.getElementById('modalForm');
 const modalSuccess = document.getElementById('modalSuccess');
@@ -411,11 +414,15 @@ window.addEventListener('pagehide', () => {
     selectedRating = 0;
     stars.forEach(s => s.classList.remove('active', 'dimmed'));
 
+<<<<<<< HEAD
     resetRegisterForm();
     registerOverlay.classList.remove('open');
 
     overlay.classList.remove('open');
     supportOverlay.classList.remove('open');
+=======
+    overlay.classList.remove('open');
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
     document.body.style.overflow = '';
 });
 

@@ -82,14 +82,22 @@
          padding: 80px 0;
      }
 
+<<<<<<< HEAD
      #reviewOverlay,
      #registerOverlay {
+=======
+     #reviewOverlay {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
          align-items: center;
          padding: 16px;
      }
 
+<<<<<<< HEAD
      .modal,
      .register-modal {
+=======
+     .modal {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
          padding: 32px 24px;
          margin: 0;
          border-radius: 20px;
@@ -99,6 +107,7 @@
          transform: translateY(20px) scale(0.97);
      }
 
+<<<<<<< HEAD
      #reviewOverlay.open .modal,
      #registerOverlay.open .register-modal {
          transform: translateY(0) scale(1);
@@ -111,6 +120,17 @@
 
      .modal-subtitle,
      .register-subtitle {
+=======
+     #reviewOverlay.open .modal {
+         transform: translateY(0) scale(1);
+     }
+
+     .modal h2 {
+         font-size: 1.3rem;
+     }
+
+     .modal-subtitle {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
          font-size: 0.82rem;
          margin-bottom: 18px;
      }
@@ -129,8 +149,12 @@
      }
 
      .modal input,
+<<<<<<< HEAD
      .modal textarea,
      .register-modal input {
+=======
+     .modal textarea {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
          padding: 11px 14px;
          font-size: 16px;
          border-radius: 10px;
@@ -162,8 +186,12 @@
  }
 
  @media (max-width: 400px) {
+<<<<<<< HEAD
      .modal,
      .register-modal {
+=======
+     .modal {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
          padding: 24px 18px;
      }
 
@@ -171,8 +199,12 @@
          font-size: 1.4rem;
      }
 
+<<<<<<< HEAD
      .modal h2,
      .register-modal h2 {
+=======
+     .modal h2 {
+>>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
          font-size: 1.2rem;
      }
  }
