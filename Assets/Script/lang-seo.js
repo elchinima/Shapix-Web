@@ -20,10 +20,7 @@ const i18n = {
         navGallery: 'Галерея',
         navAbout: 'О игре',
         navReview: 'Отзыв',
-<<<<<<< HEAD
         navRegister: 'Регистрация',
-=======
->>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
         navSupport: 'Поддержать нас',
         navDownload: 'Скачать',
         reviewTitle: 'Оставить отзыв',
@@ -39,7 +36,6 @@ const i18n = {
         sendingBtn: 'Отправка...',
         successTitle: 'Отзыв отправлен!',
         successText: 'Спасибо за обратную связь — это помогает сделать Shapix лучше.',
-<<<<<<< HEAD
         registerTitle: 'Создать аккаунт',
         registerSubtitle: 'Nickname и Password обязательны. Email можно добавить по желанию.',
         registerNicknameLabel: 'Nickname',
@@ -56,8 +52,6 @@ const i18n = {
         registerNicknameError: 'Nickname должен содержать минимум 2 символа.',
         registerPasswordError: 'Password должен содержать минимум 8 символов.',
         registerEmailError: 'Введите корректный Email или уберите галочку.',
-=======
->>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
         supportTitle: 'Поддержать Shapix',
         supportDesc: 'Игра создаётся в одиночку, с душой и без бюджета. Каждый донат — это мотивация делать больше и лучше. Спасибо, что ты здесь.',
         supportQrHint: 'Отсканируй камерой телефона',
@@ -98,10 +92,7 @@ const i18n = {
         navGallery: 'Gallery',
         navAbout: 'About',
         navReview: 'Review',
-<<<<<<< HEAD
         navRegister: 'Sign Up',
-=======
->>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
         navSupport: 'Support Us',
         navDownload: 'Download',
         reviewTitle: 'Leave a Review',
@@ -117,7 +108,6 @@ const i18n = {
         sendingBtn: 'Sending...',
         successTitle: 'Review Sent!',
         successText: 'Thank you for your feedback — it helps make Shapix better.',
-<<<<<<< HEAD
         registerTitle: 'Create Account',
         registerSubtitle: 'Nickname and Password are required. Email is optional via checkbox.',
         registerNicknameLabel: 'Nickname',
@@ -134,8 +124,6 @@ const i18n = {
         registerNicknameError: 'Nickname must contain at least 2 characters.',
         registerPasswordError: 'Password must contain at least 8 characters.',
         registerEmailError: 'Enter a valid Email or uncheck the option.',
-=======
->>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
         supportTitle: 'Support Shapix',
         supportDesc: 'The game is made solo, with heart and no budget. Every donation is motivation to do more and better. Thank you for being here.',
         supportQrHint: 'Scan with your phone camera',
@@ -176,10 +164,7 @@ const i18n = {
         navGallery: 'Qalereyа',
         navAbout: 'Oyun haqqında',
         navReview: 'Rəy',
-<<<<<<< HEAD
         navRegister: 'Qeydiyyat',
-=======
->>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
         navSupport: 'Dəstək ol',
         navDownload: 'Yüklə',
         reviewTitle: 'Rəy Burax',
@@ -195,7 +180,6 @@ const i18n = {
         sendingBtn: 'Göndərilir...',
         successTitle: 'Rəy göndərildi!',
         successText: 'Rəy üçün təşəkkür edirik — bu Shapix-i daha yaxşı etməyə kömək edir.',
-<<<<<<< HEAD
         registerTitle: 'Hesab yarat',
         registerSubtitle: 'Nickname və Password məcburidir. Email isə seçimlə əlavə olunur.',
         registerNicknameLabel: 'Nickname',
@@ -212,8 +196,6 @@ const i18n = {
         registerNicknameError: 'Nickname ən azı 2 simvol olmalıdır.',
         registerPasswordError: 'Password ən azı 8 simvol olmalıdır.',
         registerEmailError: 'Düzgün Email daxil edin və ya seçimi söndürün.',
-=======
->>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
         supportTitle: 'Shapix-i dəstəklə',
         supportDesc: 'Oyun tək başına, ürəklə və büdcəsiz hazırlanır. Hər donat daha çox və daha yaxşı etmək üçün motivasiyadır. Burada olduğun üçün təşəkkür edirik.',
         supportQrHint: 'Telefon kameranızla skan edin',
@@ -309,7 +291,6 @@ function applyLang(lang) {
     if (navLinkDownload) navLinkDownload.textContent = t.navDownload;
     const openReview = document.getElementById('openReview');
     if (openReview) openReview.textContent = t.navReview;
-<<<<<<< HEAD
     const openRegister = document.getElementById('openRegister');
     if (openRegister) openRegister.textContent = t.navRegister;
     const openSupport = document.getElementById('openSupport');
@@ -319,13 +300,6 @@ function applyLang(lang) {
     if (reviewTitleEl) reviewTitleEl.textContent = t.reviewTitle;
     const reviewSubtitleEl = document.querySelector('#modalForm .modal-subtitle');
     if (reviewSubtitleEl) reviewSubtitleEl.textContent = t.reviewSubtitle;
-=======
-    const openSupport = document.getElementById('openSupport');
-    if (openSupport) openSupport.textContent = t.navSupport;
-
-    document.querySelector('#modalForm h2').textContent = t.reviewTitle;
-    document.querySelector('.modal-subtitle').textContent = t.reviewSubtitle;
->>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
     const modalLabels = document.querySelectorAll('.modal-form .field-wrap label');
     if (modalLabels[0]) modalLabels[0].textContent = t.labelName;
     if (modalLabels[1]) modalLabels[1].textContent = t.labelReview;
@@ -333,7 +307,6 @@ function applyLang(lang) {
     document.getElementById('reviewName').placeholder = t.placeholderName;
     document.getElementById('reviewText').placeholder = t.placeholderReview;
     document.getElementById('reviewContact').placeholder = t.placeholderContact;
-<<<<<<< HEAD
     const reviewContactToggleLabel = document.getElementById('reviewContactToggleLabel');
     if (reviewContactToggleLabel) reviewContactToggleLabel.textContent = t.contactLabel;
     const submitEl = document.getElementById('modalSubmit');
@@ -369,14 +342,6 @@ function applyLang(lang) {
     if (registerSuccessTitle) registerSuccessTitle.textContent = t.registerSuccessTitle;
     const registerSuccessText = document.getElementById('registerSuccessText');
     if (registerSuccessText) registerSuccessText.textContent = t.registerSuccessText;
-=======
-    document.querySelector('.contact-toggle-label').textContent = t.contactLabel;
-    const submitEl = document.getElementById('modalSubmit');
-    if (!submitEl.disabled) submitEl.textContent = t.submitBtn;
-    document.querySelector('.modal-success h3').textContent = t.successTitle;
-    document.querySelector('.modal-success p').textContent = t.successText;
-    document.querySelector('.info-tooltip').innerHTML = t.tooltipText;
->>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
 
     document.querySelector('.support-modal h2').textContent = t.supportTitle;
     document.querySelector('.support-modal p').textContent = t.supportDesc;

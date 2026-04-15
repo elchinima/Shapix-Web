@@ -42,7 +42,6 @@ Shapix Web is a landing page for the Shapix game with a minimal visual style, mu
 The demo below uses the same knife SVG and the same animation values as the website hero button.
 Click Play to trigger the stab interaction.
 
-<<<<<<< HEAD
 <p align="center"><em>Best viewed in VS Code Markdown Preview or any modern Chromium-based browser.</em></p>
 
 <style>
@@ -165,8 +164,6 @@ Click Play to trigger the stab interaction.
 
 Click Play: the knife drops and stabs the button with the same distance and timing used on the site.
 
-=======
->>>>>>> f8bbe6f288fbe09a8fa18f773cd082ba85365722
 ## Contacts
 
 - Author: Elsim
