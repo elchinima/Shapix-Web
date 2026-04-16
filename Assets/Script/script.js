@@ -298,7 +298,7 @@ registerSubmit.addEventListener('click', async () => {
             }
 
             const apiMessage = payload && typeof payload === 'object'
-                ? (payload.message || payload.title || '')
+                ? (payload.message || payload.detail || payload.title || '')
                 : '';
 
             if (!handled && apiMessage) {

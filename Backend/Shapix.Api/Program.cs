@@ -14,9 +14,12 @@ builder.Services.AddCors(options =>
     });
 });
 
-var connectionString =
-    builder.Configuration.GetConnectionString("Supabase")
-    ?? builder.Configuration["SUPABASE_DB_CONNECTION"];
+var connectionString = builder.Configuration["SUPABASE_DB_CONNECTION"];
+
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    connectionString = builder.Configuration.GetConnectionString("Supabase");
+}
 
 if (string.IsNullOrWhiteSpace(connectionString))
 {
@@ -57,10 +60,10 @@ app.MapPost("/api/auth/register", async (RegisterRequest request, NpgsqlDataSour
         returning id, nickname, email, created_at as CreatedAt, updated_at as UpdatedAt;
         """;
 
-    await using var connection = await dataSource.OpenConnectionAsync(ct);
-
     try
     {
+        await using var connection = await dataSource.OpenConnectionAsync(ct);
+
         var created = await connection.QuerySingleAsync<AccountResponse>(
             new CommandDefinition(
                 sql,
@@ -82,6 +85,27 @@ app.MapPost("/api/auth/register", async (RegisterRequest request, NpgsqlDataSour
             "shapix_player_accounts_email_key" => Results.Conflict(new ErrorResponse("Email already exists.")),
             _ => Results.Conflict(new ErrorResponse("Account already exists."))
         };
+    }
+    catch (PostgresException ex)
+    {
+        return Results.Problem(
+            title: "Database error",
+            detail: ex.SqlState + ": " + ex.MessageText,
+            statusCode: StatusCodes.Status500InternalServerError);
+    }
+    catch (NpgsqlException ex)
+    {
+        return Results.Problem(
+            title: "Database connection error",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status500InternalServerError);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(
+            title: "Unexpected server error",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status500InternalServerError);
     }
 });
 
