@@ -56,10 +56,13 @@
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23314D78'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Inter,sans-serif' font-weight='700' font-size='14' fill='white'%3ESh%3C/text%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./Assets/CSSs/style.css">
     <link rel="stylesheet" href="./Assets/CSSs/media.css">
+    <script defer src="./Assets/Script/seo.js"></script>
+    <script defer src="./Assets/Script/lang.js"></script>
     <script defer src="./Assets/Script/script.js"></script>
-    <script defer src="./Assets/Script/lang-seo.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
@@ -76,7 +79,7 @@
     </div>
 
     <div id="reviewOverlay">
-        <div class="modal">
+        <div class="review-modal">
             <button class="modal-close" id="modalClose">&times;</button>
 
             <div class="modal-form" id="modalForm">
@@ -110,10 +113,12 @@
                 <div class="contact-toggle" id="contactToggle">
                     <input type="checkbox" id="contactCheckbox" />
                     <div class="checkbox-box" id="checkboxBox"></div>
-                    <span class="contact-toggle-label" id="reviewContactToggleLabel">Оставить контакт для обратной связи</span>
+                    <span class="contact-toggle-label" id="reviewContactToggleLabel">Оставить контакт для обратной
+                        связи</span>
                     <span class="info-icon">
                         i
-                        <span class="info-tooltip" id="reviewTooltipText">Это поле по желанию. Ваши контактные данные нам нужны для возможного
+                        <span class="info-tooltip" id="reviewTooltipText">Это поле по желанию. Ваши контактные данные
+                            нам нужны для возможного
                             уточнения некоторых моментов. Контактами обратной связи могут быть один из перечисленных
                             вариантов:<br><br>1. Email (свой, рабочий)<br>2. Номер телефона (только для
                             Азербайджана)<br>3. Discord, Instagram, Telegram (должен быть открытым для отправки
@@ -149,34 +154,48 @@
             <button class="modal-close" id="registerClose">&times;</button>
 
             <div class="register-form" id="registerForm">
-                <h2 id="registerTitle">Создать аккаунт</h2>
-                <p class="register-subtitle" id="registerSubtitle">Nickname и Password обязательны. Email можно добавить по желанию.</p>
+                <h2 id="registerTitle">Создать / Вход в аккаунт</h2>
+                <p class="register-subtitle" id="registerSubtitle">Nickname и Password обязательны. До 50 символов в
+                    каждое поле. Email можно добавить по желанию.</p>
 
                 <div class="field-wrap">
-                    <label id="registerNicknameLabel" for="registerNickname">Nickname</label>
-                    <input type="text" id="registerNickname" placeholder="Минимум 2 символа" autocomplete="username" minlength="2" required />
+                    <div class="field-header">
+                        <label id="registerNicknameLabel" for="registerNickname">Nickname</label>
+                        <span class="char-counter" id="registerNicknameCounter">0 / 50</span>
+                    </div>
+                    <input type="text" id="registerNickname" placeholder="Минимум 2 символа" autocomplete="username"
+                        minlength="2" maxlength="50" required />
                     <p class="field-error" id="registerNicknameError"></p>
                 </div>
 
                 <div class="contact-toggle" id="registerEmailToggle">
                     <input type="checkbox" id="registerEmailCheckbox" />
                     <div class="checkbox-box" id="registerEmailCheckboxBox"></div>
-                    <span class="contact-toggle-label" id="registerEmailToggleLabel">Добавить Email (необязательно)</span>
+                    <span class="contact-toggle-label" id="registerEmailToggleLabel">Добавить Email
+                        (необязательно)</span>
                 </div>
 
                 <div class="contact-field-wrap" id="registerEmailFieldWrap">
                     <div class="contact-field-inner">
                         <div class="field-wrap" style="margin-top: 12px;">
-                            <label id="registerEmailLabel" for="registerEmail">Email</label>
-                            <input type="email" id="registerEmail" placeholder="you@example.com" autocomplete="email" />
+                            <div class="field-header">
+                                <label id="registerEmailLabel" for="registerEmail">Email</label>
+                                <span class="char-counter" id="registerEmailCounter">0 / 50</span>
+                            </div>
+                            <input type="email" id="registerEmail" placeholder="you@example.com" autocomplete="email"
+                                maxlength="50" />
                             <p class="field-error" id="registerEmailError"></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="field-wrap">
-                    <label id="registerPasswordLabel" for="registerPassword">Password</label>
-                    <input type="password" id="registerPassword" placeholder="Минимум 8 символов" autocomplete="new-password" minlength="8" required />
+                    <div class="field-header">
+                        <label id="registerPasswordLabel" for="registerPassword">Password</label>
+                        <span class="char-counter" id="registerPasswordCounter">0 / 50</span>
+                    </div>
+                    <input type="password" id="registerPassword" placeholder="Минимум 8 символов"
+                        autocomplete="new-password" minlength="8" maxlength="50" required />
                     <p class="field-error" id="registerPasswordError"></p>
                 </div>
 
@@ -210,20 +229,48 @@
         </div>
     </div>
 
-    <nav class="navbar">
+    <nav class="top-navbar">
         <div class="logo">Shapix <span>v0.5 Beta</span></div>
         <ul class="nav-links">
-            <li class="nav-link"><a href="#gallery">Галерея</a></li>
-            <li class="nav-link"><a href="#features">О игре</a></li>
+            <li class="desktop-nav-link"><a href="#gallery">Галерея</a></li>
+            <li class="desktop-nav-link"><a href="#features">О игре</a></li>
 
             <li><a href="#" id="openReview">Отзыв</a></li>
             <li><a href="#" id="openRegister">Регистрация</a></li>
             <li><a href="#" id="openSupport">Поддержать нас</a></li>
 
-            <li class="nav-link"><a id="nav-link-in-process"
-                    href="">Скачать</a>
+            <li class="desktop-nav-link"><a id="nav-link-in-process" href="">Скачать</a>
             </li>
         </ul>
+    </nav>
+
+    <nav class="navbar mobile-bottom-navbar fixed-bottom d-md-none" aria-label="Мобильная навигация">
+        <div class="container-fluid mobile-bottom-navbar-inner">
+            <div class="mobile-bottom-brand">Shapix <span>v0.5 Beta</span></div>
+            <ul class="nav nav-justified w-100 mobile-bottom-list">
+                <li class="nav-item">
+                    <a class="mobile-bottom-link" href="#" id="openReviewMobile" aria-label="Отзыв"
+                        data-i18n-aria="navReview">
+                        <i class="bi bi-chat-square-heart-fill" aria-hidden="true"></i>
+                        <span class="visually-hidden" data-i18n="navReview">Отзыв</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="mobile-bottom-link" href="#" id="openRegisterMobile" aria-label="Регистрация"
+                        data-i18n-aria="navRegister">
+                        <i class="bi bi-person-plus-fill" aria-hidden="true"></i>
+                        <span class="visually-hidden" data-i18n="navRegister">Регистрация</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="mobile-bottom-link" href="#" id="openSupportMobile" aria-label="Поддержать"
+                        data-i18n-aria="navSupport">
+                        <i class="bi bi-heart-fill" aria-hidden="true"></i>
+                        <span class="visually-hidden" data-i18n="navSupport">Поддержать</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <header class="hero">
@@ -232,8 +279,7 @@
             <h1>Искусство броска</h1>
             <p>Испытайте свои рефлексы в минималистичном мире, где важна каждая секунда и каждый миллиметр точности.</p>
             <div class="btn-knife-wrap">
-                <a href=""
-                    class="btn-primary" id="heroPlayBtn">Играть</a>
+                <a href="" class="btn-primary" id="heroPlayBtn">Играть</a>
                 <svg class="hero-knife" id="heroKnife" viewBox="0 0 18 70" xmlns="http://www.w3.org/2000/svg">
                     <rect x="5" y="-9" width="8" height="25" rx="3" fill="rgba(255,255,255,0.4)" />
                     <rect x="6" y="16" width="6" height="3" rx="1" fill="rgba(255,255,255,0.6)" />

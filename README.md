@@ -28,7 +28,8 @@ Shapix Web is a landing page for the Shapix game with a minimal visual style, mu
     |   `-- media.css
     `-- Script
         |-- script.js
-        `-- lang-seo.js
+      |-- lang.js
+      `-- seo.js
 ```
 
 ## Local Run

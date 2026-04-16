@@ -36,21 +36,22 @@ const i18n = {
         sendingBtn: 'Отправка...',
         successTitle: 'Отзыв отправлен!',
         successText: 'Спасибо за обратную связь — это помогает сделать Shapix лучше.',
-        registerTitle: 'Создать аккаунт',
-        registerSubtitle: 'Nickname и Password обязательны. Email можно добавить по желанию.',
+        registerTitle: 'Создать/Вход в аккаунт',
+        registerSubtitle: 'Nickname и Password обязательны. До 50 символов в каждое поле. Email можно добавить по желанию.',
         registerNicknameLabel: 'Nickname',
-        registerNicknamePlaceholder: 'Минимум 2 символа',
+        registerNicknamePlaceholder: 'От 2 до 50 символов',
         registerEmailToggle: 'Добавить Email (необязательно)',
         registerEmailLabel: 'Email',
-        registerEmailPlaceholder: 'you@example.com',
+        registerEmailPlaceholder: 'you@example.com (до 50 символов)',
         registerPasswordLabel: 'Password',
-        registerPasswordPlaceholder: 'Минимум 8 символов',
+        registerPasswordPlaceholder: 'От 8 до 50 символов',
         registerSubmitBtn: 'Зарегистрироваться',
         registerSendingBtn: 'Создание...',
         registerSuccessTitle: 'Регистрация завершена!',
         registerSuccessText: 'Аккаунт успешно создан.',
         registerNicknameError: 'Nickname должен содержать минимум 2 символа.',
         registerPasswordError: 'Password должен содержать минимум 8 символов.',
+        registerEmailRequiredError: 'Добавьте Email или снимите галочку.',
         registerEmailError: 'Введите корректный Email или уберите галочку.',
         supportTitle: 'Поддержать Shapix',
         supportDesc: 'Игра создаётся в одиночку, с душой и без бюджета. Каждый донат — это мотивация делать больше и лучше. Спасибо, что ты здесь.',
@@ -62,14 +63,6 @@ const i18n = {
         loaderMsg2: 'Подготовка ножей...',
         loaderMsg3: 'Почти готово...',
         tooltipText: 'Это поле по желанию. Ваши контактные данные нам нужны для возможного уточнения некоторых моментов. Контактами обратной связи могут быть один из перечисленных вариантов:<br><br>1. Email (свой, рабочий)<br>2. Номер телефона (только для Азербайджана)<br>3. Discord, Instagram, Telegram (должен быть открытым для отправки сообщений от посторонних пользователей)',
-        seoTitle: 'Shapix | Игра — Бросок ножа',
-        seoDesc: 'Shapix — минималистичная игра-бросок ножа для Android. Испытай рефлексы в точной механике, чистом дизайне и без лишнего. Early Access.',
-        seoKeywords: 'Shapix, игра нож, бросок ножа, knife throw, Android игра, минималистичная игра, мобильная игра, knife game',
-        seoOgTitle: 'Shapix | Игра — Бросок ножа',
-        seoOgDesc: 'Минималистичная игра-бросок ножа для Android. Точная механика, чистый дизайн, Early Access.',
-        seoOgLocale: 'ru_RU',
-        seoLdDesc: 'Минималистичная игра-бросок ножа для Android с точной механикой и чистым дизайном.',
-        htmlLang: 'ru',
     },
     en: {
         copyright: '© 2026 Shapix Project. Developed by <a class="elsim-link" href="https://elsim-web.vercel.app" target="_blank" rel="noopener">Elsim</a>.',
@@ -108,21 +101,22 @@ const i18n = {
         sendingBtn: 'Sending...',
         successTitle: 'Review Sent!',
         successText: 'Thank you for your feedback — it helps make Shapix better.',
-        registerTitle: 'Create Account',
-        registerSubtitle: 'Nickname and Password are required. Email is optional via checkbox.',
+        registerTitle: 'Create/Sign In Account',
+        registerSubtitle: 'Nickname and Password are required. Each field supports up to 50 characters. Email is optional via checkbox.',
         registerNicknameLabel: 'Nickname',
-        registerNicknamePlaceholder: 'At least 2 characters',
+        registerNicknamePlaceholder: '2 to 50 characters',
         registerEmailToggle: 'Add Email (optional)',
         registerEmailLabel: 'Email',
-        registerEmailPlaceholder: 'you@example.com',
+        registerEmailPlaceholder: 'you@example.com (up to 50 chars)',
         registerPasswordLabel: 'Password',
-        registerPasswordPlaceholder: 'At least 8 characters',
+        registerPasswordPlaceholder: '8 to 50 characters',
         registerSubmitBtn: 'Sign Up',
         registerSendingBtn: 'Creating...',
         registerSuccessTitle: 'Registration complete!',
         registerSuccessText: 'Your account has been created successfully.',
         registerNicknameError: 'Nickname must contain at least 2 characters.',
         registerPasswordError: 'Password must contain at least 8 characters.',
+        registerEmailRequiredError: 'Add an Email or uncheck the option.',
         registerEmailError: 'Enter a valid Email or uncheck the option.',
         supportTitle: 'Support Shapix',
         supportDesc: 'The game is made solo, with heart and no budget. Every donation is motivation to do more and better. Thank you for being here.',
@@ -134,14 +128,6 @@ const i18n = {
         loaderMsg2: 'Preparing knives...',
         loaderMsg3: 'Almost ready...',
         tooltipText: 'This field is optional. Your contact details are needed for possible clarification on some points. Feedback contacts can be one of the following:<br><br>1. Email (personal or work)<br>2. Phone number (Azerbaijan only)<br>3. Discord, Instagram, Telegram (must be open to messages from strangers)',
-        seoTitle: 'Shapix | Knife Throw Game for Android',
-        seoDesc: 'Shapix — a minimalist knife-throwing game for Android. Test your reflexes with precise mechanics and clean design. Early Access.',
-        seoKeywords: 'Shapix, knife game, knife throw, Android game, minimalist game, mobile game, knife throwing',
-        seoOgTitle: 'Shapix | Knife Throw Game for Android',
-        seoOgDesc: 'A minimalist knife-throwing game for Android. Precise mechanics, clean design, Early Access.',
-        seoOgLocale: 'en_US',
-        seoLdDesc: 'A minimalist knife-throwing game for Android with precise mechanics and clean design.',
-        htmlLang: 'en',
     },
     az: {
         copyright: '© 2026 Shapix Project. <a class="elsim-link" href="https://elsim-web.vercel.app" target="_blank" rel="noopener">Elsim</a> tərəfindən hazırlanıb.',
@@ -180,21 +166,22 @@ const i18n = {
         sendingBtn: 'Göndərilir...',
         successTitle: 'Rəy göndərildi!',
         successText: 'Rəy üçün təşəkkür edirik — bu Shapix-i daha yaxşı etməyə kömək edir.',
-        registerTitle: 'Hesab yarat',
-        registerSubtitle: 'Nickname və Password məcburidir. Email isə seçimlə əlavə olunur.',
+        registerTitle: 'Hesab yarat/Daxil ol',
+        registerSubtitle: 'Nickname və Password məcburidir. Hər sahə üçün maksimum 50 simvol dəstəklənir. Email seçimlə əlavə olunur.',
         registerNicknameLabel: 'Nickname',
-        registerNicknamePlaceholder: 'Minimum 2 simvol',
+        registerNicknamePlaceholder: '2-dən 50-yə simvol',
         registerEmailToggle: 'Email əlavə et (məcburi deyil)',
         registerEmailLabel: 'Email',
-        registerEmailPlaceholder: 'you@example.com',
+        registerEmailPlaceholder: 'you@example.com (maks. 50 simvol)',
         registerPasswordLabel: 'Password',
-        registerPasswordPlaceholder: 'Minimum 8 simvol',
+        registerPasswordPlaceholder: '8-dən 50-yə simvol',
         registerSubmitBtn: 'Qeydiyyatdan keç',
         registerSendingBtn: 'Yaradılır...',
         registerSuccessTitle: 'Qeydiyyat tamamlandı!',
         registerSuccessText: 'Hesabınız uğurla yaradıldı.',
         registerNicknameError: 'Nickname ən azı 2 simvol olmalıdır.',
         registerPasswordError: 'Password ən azı 8 simvol olmalıdır.',
+        registerEmailRequiredError: 'Email əlavə edin və ya seçimi söndürün.',
         registerEmailError: 'Düzgün Email daxil edin və ya seçimi söndürün.',
         supportTitle: 'Shapix-i dəstəklə',
         supportDesc: 'Oyun tək başına, ürəklə və büdcəsiz hazırlanır. Hər donat daha çox və daha yaxşı etmək üçün motivasiyadır. Burada olduğun üçün təşəkkür edirik.',
@@ -206,14 +193,6 @@ const i18n = {
         loaderMsg2: 'Bıçaqlar hazırlanır...',
         loaderMsg3: 'Az qaldı...',
         tooltipText: 'Bu sahə isteğe bağlıdır. Əlaqə məlumatlarınız bəzi məqamları aydınlaşdırmaq üçün lazım ola bilər. Geri əlaqə kontaktları aşağıdakılardan biri ola bilər:<br><br>1. Email (şəxsi və ya iş)<br>2. Telefon nömrəsi (yalnız Azərbaycan üçün)<br>3. Discord, Instagram, Telegram (yad istifadəçilərdən mesaj qəbul etməyə açıq olmalıdır)',
-        seoTitle: 'Shapix | Android üçün Bıçaq Atma Oyunu',
-        seoDesc: 'Shapix — Android üçün minimalist bıçaq atma oyunu. Dəqiq mexanika və təmiz dizaynla reflekslərinizi sınayın. Erkən Giriş.',
-        seoKeywords: 'Shapix, bıçaq oyunu, bıçaq atma, knife throw, Android oyunu, minimalist oyun, mobil oyun',
-        seoOgTitle: 'Shapix | Android üçün Bıçaq Atma Oyunu',
-        seoOgDesc: 'Android üçün minimalist bıçaq atma oyunu. Dəqiq mexanika, təmiz dizayn, Erkən Giriş.',
-        seoOgLocale: 'az_AZ',
-        seoLdDesc: 'Android üçün dəqiq mexanika və təmiz dizaynla minimalist bıçaq atma oyunu.',
-        htmlLang: 'az',
     }
 };
 
@@ -231,34 +210,20 @@ function detectLang() {
 }
 
 function applyLang(lang) {
-    const t = i18n[lang];
-    currentLang = lang;
-
-    document.documentElement.lang = t.htmlLang;
-    document.getElementById('metaTitle').textContent = t.seoTitle;
-    document.getElementById('metaDesc').setAttribute('content', t.seoDesc);
-    document.getElementById('metaKeywords').setAttribute('content', t.seoKeywords);
-    document.getElementById('ogTitle').setAttribute('content', t.seoOgTitle);
-    document.getElementById('ogDesc').setAttribute('content', t.seoOgDesc);
-    document.getElementById('ogLocale').setAttribute('content', t.seoOgLocale);
-    document.getElementById('twTitle').setAttribute('content', t.seoOgTitle);
-    document.getElementById('twDesc').setAttribute('content', t.seoOgDesc);
-    document.getElementById('ldJson').textContent = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Shapix",
-        "operatingSystem": "Android",
-        "applicationCategory": "GameApplication",
-        "description": t.seoLdDesc,
-        "author": { "@type": "Person", "name": "Elsim" },
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-    }, null, 2);
+    const t = i18n[lang] || i18n.ru;
+    const resolvedLang = i18n[lang] ? lang : 'ru';
+    currentLang = resolvedLang;
 
     document.getElementById('footerCopyright').innerHTML = t.copyright;
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
         if (t[key]) el.textContent = t[key];
+    });
+
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+        const key = el.dataset.i18nAria;
+        if (t[key]) el.setAttribute('aria-label', t[key]);
     });
 
     const heroBadge = document.querySelector('.hero-content .badge');
@@ -284,7 +249,7 @@ function applyLang(lang) {
     const featDesc = document.querySelector('.feature-item p');
     if (featDesc) featDesc.textContent = t.featDesc;
 
-    const navLinks = document.querySelectorAll('.nav-link a');
+    const navLinks = document.querySelectorAll('.desktop-nav-link a');
     if (navLinks[0]) navLinks[0].textContent = t.navGallery;
     if (navLinks[1]) navLinks[1].textContent = t.navAbout;
     const navLinkDownload = document.getElementById('nav-link-in-process');
@@ -351,8 +316,12 @@ function applyLang(lang) {
     document.querySelector('.support-note').textContent = t.supportNote;
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
+        btn.classList.toggle('active', btn.dataset.lang === resolvedLang);
     });
+
+    document.dispatchEvent(new CustomEvent('shapix:lang-change', {
+        detail: { lang: resolvedLang }
+    }));
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {

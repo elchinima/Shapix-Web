@@ -25,15 +25,23 @@ window.addEventListener('load', () => {
 
 const supportOverlay = document.getElementById('supportOverlay');
 
-document.getElementById('openSupport').addEventListener('click', (e) => {
+const supportOpenTriggers = ['openSupport', 'openSupportMobile'];
+
+function openSupportModal(e) {
     e.preventDefault();
+    closeAllModals(supportOverlay);
     supportOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    syncBodyScrollLock();
+}
+
+supportOpenTriggers.forEach((id) => {
+    const trigger = document.getElementById(id);
+    if (trigger) trigger.addEventListener('click', openSupportModal);
 });
 
 function closeSupportModal() {
     supportOverlay.classList.remove('open');
-    document.body.style.overflow = '';
+    syncBodyScrollLock();
 }
 
 document.getElementById('supportClose').addEventListener('click', closeSupportModal);
@@ -73,6 +81,19 @@ function clearAllRegisterErrors() {
     clearRegisterError(registerPassword, registerPasswordError);
 }
 
+function resetRegisterCounters() {
+    ['registerNicknameCounter', 'registerEmailCounter', 'registerPasswordCounter'].forEach((id) => {
+        const counterEl = document.getElementById(id);
+        if (!counterEl) return;
+        counterEl.textContent = '0 / 50';
+        counterEl.classList.remove('at-limit');
+    });
+
+    [registerNickname, registerEmail, registerPassword].forEach((inputEl) => {
+        inputEl.classList.remove('at-limit');
+    });
+}
+
 function resetRegisterForm() {
     registerForm.classList.remove('hide');
     registerSuccess.classList.remove('show');
@@ -85,6 +106,7 @@ function resetRegisterForm() {
     registerEmailCheckboxBox.classList.remove('checked');
     registerEmailFieldWrap.classList.remove('visible');
 
+    resetRegisterCounters();
     clearAllRegisterErrors();
 
     registerSubmit.disabled = false;
@@ -95,14 +117,22 @@ function resetRegisterForm() {
 
 function closeRegisterModal() {
     registerOverlay.classList.remove('open');
-    document.body.style.overflow = '';
+    syncBodyScrollLock();
 }
 
-document.getElementById('openRegister').addEventListener('click', (e) => {
+const registerOpenTriggers = ['openRegister', 'openRegisterMobile'];
+
+function openRegisterModal(e) {
     e.preventDefault();
+    closeAllModals(registerOverlay);
     resetRegisterForm();
     registerOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    syncBodyScrollLock();
+}
+
+registerOpenTriggers.forEach((id) => {
+    const trigger = document.getElementById(id);
+    if (trigger) trigger.addEventListener('click', openRegisterModal);
 });
 
 document.getElementById('registerClose').addEventListener('click', closeRegisterModal);
@@ -117,6 +147,12 @@ registerEmailToggle.addEventListener('click', () => {
 
     if (isChecked) {
         registerEmail.value = '';
+        const emailCounter = document.getElementById('registerEmailCounter');
+        if (emailCounter) {
+            emailCounter.textContent = '0 / 50';
+            emailCounter.classList.remove('at-limit');
+        }
+        registerEmail.classList.remove('at-limit');
         clearRegisterError(registerEmail, registerEmailError);
     }
 });
@@ -138,17 +174,26 @@ registerSubmit.addEventListener('click', () => {
 
     if (nicknameValue.length < 2) {
         setRegisterError(registerNickname, registerNicknameError, i18n[currentLang].registerNicknameError);
+        shakeInput(registerNickname);
         hasError = true;
     }
 
     if (passwordValue.length < 8) {
         setRegisterError(registerPassword, registerPasswordError, i18n[currentLang].registerPasswordError);
+        shakeInput(registerPassword);
         hasError = true;
     }
 
-    if (hasEmail && emailValue && !emailPattern.test(emailValue)) {
-        setRegisterError(registerEmail, registerEmailError, i18n[currentLang].registerEmailError);
-        hasError = true;
+    if (hasEmail) {
+        if (!emailValue) {
+            setRegisterError(registerEmail, registerEmailError, i18n[currentLang].registerEmailRequiredError);
+            shakeInput(registerEmail);
+            hasError = true;
+        } else if (!emailPattern.test(emailValue)) {
+            setRegisterError(registerEmail, registerEmailError, i18n[currentLang].registerEmailError);
+            shakeInput(registerEmail);
+            hasError = true;
+        }
     }
 
     if (hasError) {
@@ -181,15 +226,41 @@ const contactCheckbox = document.getElementById('contactCheckbox');
 const contactFieldWrap = document.getElementById('contactFieldWrap');
 let selectedRating = 0;
 
-document.getElementById('openReview').addEventListener('click', (e) => {
+function syncBodyScrollLock() {
+    const hasOpenOverlay = [overlay, registerOverlay, supportOverlay].some((item) => {
+        return item && item.classList.contains('open');
+    });
+
+    document.body.style.overflow = hasOpenOverlay ? 'hidden' : '';
+}
+
+function closeAllModals(exceptOverlay = null) {
+    [overlay, registerOverlay, supportOverlay].forEach((item) => {
+        if (item && item !== exceptOverlay) {
+            item.classList.remove('open');
+        }
+    });
+
+    syncBodyScrollLock();
+}
+
+const reviewOpenTriggers = ['openReview', 'openReviewMobile'];
+
+function openReviewModal(e) {
     e.preventDefault();
+    closeAllModals(overlay);
     overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    syncBodyScrollLock();
+}
+
+reviewOpenTriggers.forEach((id) => {
+    const trigger = document.getElementById(id);
+    if (trigger) trigger.addEventListener('click', openReviewModal);
 });
 
 function closeModal() {
     overlay.classList.remove('open');
-    document.body.style.overflow = '';
+    syncBodyScrollLock();
 }
 
 document.getElementById('modalClose').addEventListener('click', closeModal);
@@ -317,6 +388,9 @@ function setupField(inputEl, counterId, maxLen) {
 setupField(document.getElementById('reviewName'), 'nameCounter', 25);
 setupField(document.getElementById('reviewText'), 'textCounter', 250);
 setupField(document.getElementById('reviewContact'), 'contactCounter', 25);
+setupField(registerNickname, 'registerNicknameCounter', 50);
+setupField(registerEmail, 'registerEmailCounter', 50);
+setupField(registerPassword, 'registerPasswordCounter', 50);
 
 modalSubmit.addEventListener('click', () => {
     const name = document.getElementById('reviewName').value.trim();
@@ -420,36 +494,36 @@ window.addEventListener('pagehide', () => {
 });
 
 const heroPlayBtn = document.getElementById('heroPlayBtn');
-        const heroKnife = document.getElementById('heroKnife');
-        const heroWrap = heroPlayBtn.closest('.btn-knife-wrap');
-        let stabbed = false;
+const heroKnife = document.getElementById('heroKnife');
+const heroWrap = heroPlayBtn.closest('.btn-knife-wrap');
+let stabbed = false;
 
-        heroWrap.addEventListener('mouseenter', () => {
-            heroKnife.classList.add('show');
-        });
+heroWrap.addEventListener('mouseenter', () => {
+    heroKnife.classList.add('show');
+});
 
-        heroWrap.addEventListener('mouseleave', () => {
-            if (stabbed) return;
-            heroKnife.classList.remove('show');
-        });
+heroWrap.addEventListener('mouseleave', () => {
+    if (stabbed) return;
+    heroKnife.classList.remove('show');
+});
 
-        heroPlayBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (stabbed) { window.open(this.href, '_blank'); return; }
-            stabbed = true;
-            const href = this.href;
+heroPlayBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (stabbed) { window.open(this.href, '_blank'); return; }
+    stabbed = true;
+    const href = this.href;
 
-            heroPlayBtn.classList.add('stabbed');
+    heroPlayBtn.classList.add('stabbed');
 
-            heroKnife.classList.add('show');
-            heroKnife.classList.remove('stab');
-            void heroKnife.offsetWidth;
-            heroKnife.classList.add('stab');
+    heroKnife.classList.add('show');
+    heroKnife.classList.remove('stab');
+    void heroKnife.offsetWidth;
+    heroKnife.classList.add('stab');
 
-            heroPlayBtn.classList.remove('shake');
-            void heroPlayBtn.offsetWidth;
-            heroPlayBtn.classList.add('shake');
-            heroPlayBtn.addEventListener('animationend', () => heroPlayBtn.classList.remove('shake'), { once: true });
+    heroPlayBtn.classList.remove('shake');
+    void heroPlayBtn.offsetWidth;
+    heroPlayBtn.classList.add('shake');
+    heroPlayBtn.addEventListener('animationend', () => heroPlayBtn.classList.remove('shake'), { once: true });
 
-            setTimeout(() => window.open(href, '_blank'), 500);
-        });
+    setTimeout(() => window.open(href, '_blank'), 500);
+});

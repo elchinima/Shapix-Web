@@ -184,7 +184,7 @@
      visibility: visible;
  }
 
- .modal,
+ .review-modal,
  .register-modal {
      background: #2a4068;
      border: 1px solid var(--glass-border);
@@ -201,7 +201,7 @@
      overflow-x: hidden;
  }
 
- #reviewOverlay.open .modal,
+ #reviewOverlay.open .review-modal,
  #registerOverlay.open .register-modal {
      transform: translateY(0) scale(1);
  }
@@ -224,7 +224,7 @@
      opacity: 1;
  }
 
- .modal h2,
+ .review-modal h2,
  .register-modal h2 {
      font-size: 1.6rem;
      margin-bottom: 8px;
@@ -277,7 +277,7 @@
      margin-bottom: 8px;
  }
 
- .modal label,
+ .review-modal label,
  .register-modal label {
      display: block;
      font-size: 0.8rem;
@@ -302,8 +302,8 @@
      opacity: 1;
  }
 
- .modal input,
- .modal textarea,
+ .review-modal input,
+ .review-modal textarea,
  .register-modal input {
      width: 100%;
      background: rgba(255, 255, 255, 0.06);
@@ -320,14 +320,14 @@
      overflow: hidden;
  }
 
- .modal input:focus,
- .modal textarea:focus,
+ .review-modal input:focus,
+ .review-modal textarea:focus,
  .register-modal input:focus {
      border-color: rgba(255, 255, 255, 0.4);
  }
 
- .modal input.at-limit:focus,
- .modal textarea.at-limit:focus {
+ .review-modal input.at-limit:focus,
+ .review-modal textarea.at-limit:focus {
      border-color: #ff6b6b;
  }
 
@@ -336,15 +336,15 @@
      border-color: #ff6b6b;
  }
 
- .modal input::placeholder,
- .modal textarea::placeholder,
+ .review-modal input::placeholder,
+ .review-modal textarea::placeholder,
  .register-modal input::placeholder {
      opacity: 0.3;
      font-weight: 300;
  }
 
  .field-error {
-    min-height: 0;
+     min-height: 0;
      margin-top: 8px;
      font-size: 0.74rem;
      font-weight: 300;
@@ -352,17 +352,17 @@
      opacity: 0;
      transition: opacity 0.2s ease;
      pointer-events: none;
-    display: none;
+     display: none;
  }
 
  .field-error.visible {
-    display: block;
+     display: block;
      opacity: 1;
  }
 
-#registerEmailFieldWrap:not(.visible) {
-    margin-bottom: 20px;
-}
+ #registerEmailFieldWrap:not(.visible) {
+     margin-bottom: 20px;
+ }
 
  @keyframes inputShake {
 
@@ -631,11 +631,12 @@
      padding: 0 20px;
  }
 
- .navbar {
+ .top-navbar {
      display: flex;
      justify-content: space-between;
      align-items: center;
      padding: 16px 5%;
+     min-height: 72px;
      position: fixed;
      top: 0;
      left: 0;
@@ -652,6 +653,9 @@
      letter-spacing: 2px;
      white-space: nowrap;
      flex-shrink: 0;
+     display: flex;
+     align-items: center;
+     line-height: 1;
  }
 
  .logo span {
@@ -667,6 +671,14 @@
      gap: 30px;
      align-items: center;
      flex-wrap: nowrap;
+     margin: 0;
+     padding: 0;
+     height: 100%;
+ }
+
+ .nav-links li {
+     display: flex;
+     align-items: center;
  }
 
  .nav-links a {
@@ -676,6 +688,10 @@
      opacity: 0.8;
      transition: 0.3s;
      white-space: nowrap;
+     display: flex;
+     align-items: center;
+     line-height: 1;
+     height: 100%;
  }
 
  .nav-links a:hover {
@@ -1072,11 +1088,11 @@
      letter-spacing: 0.3px;
  }
 
-  .btn-primary.shake {
+ .btn-primary.shake {
      animation: btnShake 0.3s ease !important;
  }
 
-  .hero-knife.stab {
+ .hero-knife.stab {
      animation: knifeStab 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
      transition: none !important;
  }
