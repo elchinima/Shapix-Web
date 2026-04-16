@@ -162,8 +162,29 @@ registerEmail.addEventListener('input', () => clearRegisterError(registerEmail, 
 registerPassword.addEventListener('input', () => clearRegisterError(registerPassword, registerPasswordError));
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const registerApiBaseUrl = window.SHAPIX_API_BASE_URL
+    ? String(window.SHAPIX_API_BASE_URL).replace(/\/+$/, '')
+    : 'http://localhost:8080';
 
-registerSubmit.addEventListener('click', () => {
+function setRegisterSubmitDefaultText() {
+    if (typeof i18n !== 'undefined' && typeof currentLang !== 'undefined' && i18n[currentLang]) {
+        registerSubmit.textContent = i18n[currentLang].registerSubmitBtn;
+        return;
+    }
+
+    registerSubmit.textContent = 'Register';
+}
+
+function getRegisterRequestErrorMessage() {
+    if (typeof currentLang !== 'undefined') {
+        if (currentLang === 'ru') return 'Не удалось выполнить регистрацию. Проверьте API и backend.';
+        if (currentLang === 'az') return 'Qeydiyyat alınmadı. API və backend-i yoxlayın.';
+    }
+
+    return 'Registration failed. Check API and backend.';
+}
+
+registerSubmit.addEventListener('click', async () => {
     const nicknameValue = registerNickname.value.trim();
     const emailValue = registerEmail.value.trim();
     const passwordValue = registerPassword.value.trim();
@@ -206,7 +227,85 @@ registerSubmit.addEventListener('click', () => {
     registerSubmit.disabled = true;
     registerSubmit.textContent = i18n[currentLang].registerSendingBtn;
 
-    setTimeout(() => {
+    try {
+        const response = await fetch(registerApiBaseUrl + '/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nickname: nicknameValue,
+                email: hasEmail ? emailValue : null,
+                password: passwordValue
+            })
+        });
+
+        let payload = null;
+        try {
+            payload = await response.json();
+        } catch (e) {
+            payload = null;
+        }
+
+        if (!response.ok) {
+            let handled = false;
+
+            const validationErrors = payload && typeof payload === 'object' ? payload.errors : null;
+            if (validationErrors && typeof validationErrors === 'object') {
+                const nicknameErrors = validationErrors.Nickname || validationErrors.nickname;
+                const emailErrors = validationErrors.Email || validationErrors.email;
+                const passwordErrors = validationErrors.Password || validationErrors.password;
+
+                if (Array.isArray(nicknameErrors) && nicknameErrors.length > 0) {
+                    setRegisterError(registerNickname, registerNicknameError, nicknameErrors[0]);
+                    shakeInput(registerNickname);
+                    handled = true;
+                }
+
+                if (Array.isArray(emailErrors) && emailErrors.length > 0) {
+                    setRegisterError(registerEmail, registerEmailError, emailErrors[0]);
+                    shakeInput(registerEmail);
+                    handled = true;
+                }
+
+                if (Array.isArray(passwordErrors) && passwordErrors.length > 0) {
+                    setRegisterError(registerPassword, registerPasswordError, passwordErrors[0]);
+                    shakeInput(registerPassword);
+                    handled = true;
+                }
+            }
+
+            const apiMessage = payload && typeof payload === 'object'
+                ? (payload.message || payload.title || '')
+                : '';
+
+            if (!handled && apiMessage) {
+                const normalized = String(apiMessage).toLowerCase();
+
+                if (normalized.includes('nickname')) {
+                    setRegisterError(registerNickname, registerNicknameError, apiMessage);
+                    shakeInput(registerNickname);
+                } else if (normalized.includes('email')) {
+                    setRegisterError(registerEmail, registerEmailError, apiMessage);
+                    shakeInput(registerEmail);
+                } else {
+                    setRegisterError(registerPassword, registerPasswordError, apiMessage);
+                    shakeInput(registerPassword);
+                }
+
+                handled = true;
+            }
+
+            if (!handled) {
+                setRegisterError(registerPassword, registerPasswordError, getRegisterRequestErrorMessage());
+                shakeInput(registerPassword);
+            }
+
+            registerSubmit.disabled = false;
+            setRegisterSubmitDefaultText();
+            return;
+        }
+
         registerForm.classList.add('hide');
         registerSuccess.classList.add('show');
 
@@ -214,7 +313,12 @@ registerSubmit.addEventListener('click', () => {
             closeRegisterModal();
             setTimeout(() => resetRegisterForm(), 350);
         }, 1800);
-    }, 700);
+    } catch (e) {
+        setRegisterError(registerPassword, registerPasswordError, getRegisterRequestErrorMessage());
+        shakeInput(registerPassword);
+        registerSubmit.disabled = false;
+        setRegisterSubmitDefaultText();
+    }
 });
 
 const overlay = document.getElementById('reviewOverlay');
