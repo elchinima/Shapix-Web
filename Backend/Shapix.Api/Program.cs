@@ -8,7 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
@@ -36,32 +36,37 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors();
+app.UseCors("AllowAll");
 
-app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
+app.MapGet("/health", () => Results.Ok(new { status = "ok" })).RequireCors("AllowAll");
 
 app.MapPost("/api/auth/register", async (RegisterRequest request, NpgsqlDataSource dataSource, CancellationToken ct) =>
 {
-    var validationErrors = RequestValidator.ValidateRegister(request);
-    if (validationErrors.Count > 0)
-    {
-        return Results.ValidationProblem(validationErrors);
-    }
-
-    var nickname = request.Nickname.Trim();
-    var email = string.IsNullOrWhiteSpace(request.Email)
-        ? null
-        : request.Email.Trim().ToLowerInvariant();
-    var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
-
-    const string sql = """
-        insert into public.shapix_player_accounts (nickname, email, password_hash)
-        values (@Nickname, @Email, @PasswordHash)
-        returning id, nickname, email, created_at as CreatedAt, updated_at as UpdatedAt;
-        """;
-
     try
     {
+        if (request == null)
+        {
+            return Results.BadRequest(new ErrorResponse("Invalid request body."));
+        }
+
+        var validationErrors = RequestValidator.ValidateRegister(request);
+        if (validationErrors.Count > 0)
+        {
+            return Results.ValidationProblem(validationErrors);
+        }
+
+        var nickname = request.Nickname.Trim();
+        var email = string.IsNullOrWhiteSpace(request.Email)
+            ? null
+            : request.Email.Trim().ToLowerInvariant();
+        var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+        const string sql = """
+            insert into public.shapix_player_accounts (nickname, email, password_hash)
+            values (@Nickname, @Email, @PasswordHash)
+            returning id, nickname, email, created_at as CreatedAt, updated_at as UpdatedAt;
+            """;
+
         await using var connection = await dataSource.OpenConnectionAsync(ct);
 
         var created = await connection.QuerySingleAsync<AccountResponse>(
@@ -107,43 +112,58 @@ app.MapPost("/api/auth/register", async (RegisterRequest request, NpgsqlDataSour
             detail: ex.Message,
             statusCode: StatusCodes.Status500InternalServerError);
     }
-});
+}).RequireCors("AllowAll");
 
 app.MapPost("/api/auth/login", async (LoginRequest request, NpgsqlDataSource dataSource, CancellationToken ct) =>
 {
-    var validationErrors = RequestValidator.ValidateLogin(request);
-    if (validationErrors.Count > 0)
+    try
     {
-        return Results.ValidationProblem(validationErrors);
+        if (request == null)
+        {
+            return Results.BadRequest(new ErrorResponse("Invalid request body."));
+        }
+
+        var validationErrors = RequestValidator.ValidateLogin(request);
+        if (validationErrors.Count > 0)
+        {
+            return Results.ValidationProblem(validationErrors);
+        }
+
+        const string sql = """
+            select id, nickname, email, password_hash as PasswordHash, created_at as CreatedAt, updated_at as UpdatedAt
+            from public.shapix_player_accounts
+            where nickname = @Nickname
+            limit 1;
+            """;
+
+        await using var connection = await dataSource.OpenConnectionAsync(ct);
+
+        var account = await connection.QuerySingleOrDefaultAsync<AccountWithPassword>(
+            new CommandDefinition(
+                sql,
+                new { Nickname = request.Nickname.Trim() },
+                cancellationToken: ct));
+
+        if (account is null || !BCrypt.Net.BCrypt.Verify(request.Password, account.PasswordHash))
+        {
+            return Results.Unauthorized();
+        }
+
+        return Results.Ok(new AccountResponse(
+            account.Id,
+            account.Nickname,
+            account.Email,
+            account.CreatedAt,
+            account.UpdatedAt));
     }
-
-    const string sql = """
-        select id, nickname, email, password_hash as PasswordHash, created_at as CreatedAt, updated_at as UpdatedAt
-        from public.shapix_player_accounts
-        where nickname = @Nickname
-        limit 1;
-        """;
-
-    await using var connection = await dataSource.OpenConnectionAsync(ct);
-
-    var account = await connection.QuerySingleOrDefaultAsync<AccountWithPassword>(
-        new CommandDefinition(
-            sql,
-            new { Nickname = request.Nickname.Trim() },
-            cancellationToken: ct));
-
-    if (account is null || !BCrypt.Net.BCrypt.Verify(request.Password, account.PasswordHash))
+    catch (Exception ex)
     {
-        return Results.Unauthorized();
+        return Results.Problem(
+            title: "Unexpected server error",
+            detail: ex.Message,
+            statusCode: StatusCodes.Status500InternalServerError);
     }
-
-    return Results.Ok(new AccountResponse(
-        account.Id,
-        account.Nickname,
-        account.Email,
-        account.CreatedAt,
-        account.UpdatedAt));
-});
+}).RequireCors("AllowAll");
 
 app.MapGet("/api/users/{id:guid}", async (Guid id, NpgsqlDataSource dataSource, CancellationToken ct) =>
 {
@@ -159,7 +179,7 @@ app.MapGet("/api/users/{id:guid}", async (Guid id, NpgsqlDataSource dataSource, 
         new CommandDefinition(sql, new { Id = id }, cancellationToken: ct));
 
     return account is null ? Results.NotFound() : Results.Ok(account);
-});
+}).RequireCors("AllowAll");
 
 app.MapGet("/api/users", async (int? limit, int? offset, NpgsqlDataSource dataSource, CancellationToken ct) =>
 {
@@ -182,7 +202,7 @@ app.MapGet("/api/users", async (int? limit, int? offset, NpgsqlDataSource dataSo
             cancellationToken: ct));
 
     return Results.Ok(accounts);
-});
+}).RequireCors("AllowAll");
 
 app.Run();
 
@@ -194,16 +214,16 @@ public sealed record AccountResponse(
     Guid Id,
     string Nickname,
     string? Email,
-    DateTimeOffset CreatedAt,
-    DateTimeOffset UpdatedAt);
+    DateTime CreatedAt,
+    DateTime UpdatedAt);
 
 public sealed record AccountWithPassword(
     Guid Id,
     string Nickname,
     string? Email,
     string PasswordHash,
-    DateTimeOffset CreatedAt,
-    DateTimeOffset UpdatedAt);
+    DateTime CreatedAt,
+    DateTime UpdatedAt);
 
 public sealed record ErrorResponse(string Message);
 
