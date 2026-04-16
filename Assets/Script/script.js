@@ -162,9 +162,10 @@ registerEmail.addEventListener('input', () => clearRegisterError(registerEmail, 
 registerPassword.addEventListener('input', () => clearRegisterError(registerPassword, registerPasswordError));
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const isRegisterLocalHost = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
 const registerApiBaseUrl = window.SHAPIX_API_BASE_URL
     ? String(window.SHAPIX_API_BASE_URL).replace(/\/+$/, '')
-    : 'http://localhost:8080';
+    : (isRegisterLocalHost ? 'http://localhost:8080' : '');
 
 function setRegisterSubmitDefaultText() {
     if (typeof i18n !== 'undefined' && typeof currentLang !== 'undefined' && i18n[currentLang]) {
@@ -176,6 +177,15 @@ function setRegisterSubmitDefaultText() {
 }
 
 function getRegisterRequestErrorMessage() {
+    if (!registerApiBaseUrl && !isRegisterLocalHost) {
+        if (typeof currentLang !== 'undefined') {
+            if (currentLang === 'ru') return 'Backend URL не настроен. Укажите window.SHAPIX_API_BASE_URL с адресом API.';
+            if (currentLang === 'az') return 'Backend URL qurulmayib. API unvanini window.SHAPIX_API_BASE_URL-a yazin.';
+        }
+
+        return 'Backend URL is not configured. Set window.SHAPIX_API_BASE_URL to your API URL.';
+    }
+
     if (typeof currentLang !== 'undefined') {
         if (currentLang === 'ru') return 'Не удалось выполнить регистрацию. Проверьте API и backend.';
         if (currentLang === 'az') return 'Qeydiyyat alınmadı. API və backend-i yoxlayın.';
@@ -227,8 +237,20 @@ registerSubmit.addEventListener('click', async () => {
     registerSubmit.disabled = true;
     registerSubmit.textContent = i18n[currentLang].registerSendingBtn;
 
+    if (!registerApiBaseUrl && !isRegisterLocalHost) {
+        setRegisterError(registerPassword, registerPasswordError, getRegisterRequestErrorMessage());
+        shakeInput(registerPassword);
+        registerSubmit.disabled = false;
+        setRegisterSubmitDefaultText();
+        return;
+    }
+
     try {
-        const response = await fetch(registerApiBaseUrl + '/api/auth/register', {
+        const registerApiUrl = registerApiBaseUrl
+            ? registerApiBaseUrl + '/api/auth/register'
+            : '/api/auth/register';
+
+        const response = await fetch(registerApiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
